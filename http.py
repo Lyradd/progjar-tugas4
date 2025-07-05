@@ -5,7 +5,6 @@ import logging
 import base64
 from urllib.parse import parse_qs, unquote, urlencode
 
-
 class Http:
     def __init__(self):
         pass
@@ -112,8 +111,7 @@ class Http:
                 return
 
             filename = os.path.basename(unquote(filename))
-            # --- PERUBAHAN DI SINI ---
-            # Menyimpan file di direktori saat ini, bukan di UPLOAD_DIR
+
             filepath = filename
             filedata = base64.b64decode(filedata_b64)
 
@@ -133,8 +131,6 @@ class Http:
                 self.send_response(400, b'Bad Request: Filename not specified')
                 return
 
-            # --- PERUBAHAN DI SINI ---
-            # Menghapus file dari direktori saat ini, bukan dari UPLOAD_DIR
             filepath = filename
 
             if os.path.isfile(filepath):
@@ -150,8 +146,6 @@ class Http:
     def handle_get(self, uri):
         filename = os.path.basename(unquote(uri.strip('/')))
         
-        # --- PERUBAHAN DI SINI ---
-        # Mengambil file dari direktori saat ini, bukan dari UPLOAD_DIR
         filepath = filename
 
         if os.path.isfile(filepath):

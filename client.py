@@ -3,10 +3,9 @@ import socket
 import logging
 import os
 import base64
-# Import yang diperlukan ditambahkan
+
 from urllib.parse import urlencode
 
-# Alamat server sudah diarahkan ke 172.16.16.101
 server_address = ('172.16.16.101', 8889)
 FILE_TO_UPLOAD = 'client_image.jpg'
 FILE_TO_DELETE = 'client_delete.jpg'
@@ -61,8 +60,6 @@ def build_upload_request(filepath):
     filename = os.path.basename(filepath)
     filedata_b64 = base64.b64encode(filedata).decode()
     
-    # -- PERUBAHAN DI SINI --
-    # Menggunakan urlencode untuk membuat body yang aman
     payload = {'filename': filename, 'data': filedata_b64}
     body = urlencode(payload)
     # -----------------------
